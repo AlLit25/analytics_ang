@@ -33,14 +33,31 @@
   gap: 6px;
 }
 
-/* Для дати робимо в один рядок, щоб економити місце */
 .row-group {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  gap: 12px; /* Додаємо безпечний проміжк між текстом і інпутом */
 }
-.row-group label { margin-bottom: 0; }
-.row-group .input-default { width: auto; min-width: 150px; margin-bottom: 0 !important;}
+
+.row-group label {
+  margin-bottom: 0;
+  flex-shrink: 0; /* Текст "Дата" ніколи не стискатиметься */
+}
+
+.row-group .input-default {
+  width: 100%; /* Дозволяємо інпуту займати доступне місце */
+  max-width: 180px; /* Обмежуємо максимальну ширину замість min-width, щоб він не розпирав контейнер */
+  margin-bottom: 0 !important;
+  text-align: right; /* Робимо дату красивішою при правому вирівнюванні */
+}
+
+/* Спеціальний хак для iOS Safari, щоб інпут дати поводився слухняно */
+input[type="date"].input-default {
+  min-width: 0 !important; /* Скидаємо внутрішні обмеження iOS */
+  display: inline-flex;
+  align-items: center;
+}
 
 .form-group label {
   font-size: 13px;
@@ -136,6 +153,7 @@
     gap: 14px;
   }
 
+  /* На мобільних розгортаємо в стовпчик — це нативне та найзручніше рішення для тач-екранів */
   .row-group {
     flex-direction: column;
     align-items: flex-start;
@@ -144,5 +162,7 @@
 
   .row-group .input-default {
     width: 100%;
+    max-width: 100%; /* На весь екран мобільного */
+    text-align: left; /* Повертаємо ліве вирівнювання тексту */
   }
 }

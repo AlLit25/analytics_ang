@@ -8,7 +8,14 @@
 
     <div class="form-group row-group">
       <label>Дата</label>
-      <input type="date" class="input-default" [(ngModel)]="date" name="date" required>
+      <input
+        #dateInput
+        type="date"
+        class="input-default"
+        [(ngModel)]="date"
+        name="date"
+        (click)="dateInput.showPicker()"
+        required>
     </div>
 
     <div class="tx-switcher">
