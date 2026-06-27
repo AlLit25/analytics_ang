@@ -54,7 +54,7 @@ export class SupabaseService {
     }
 
     const loginTimestamp = localStorage.getItem('login_timestamp');
-    const thirtyMinutes = 30 * 60 * 1000; // 30 хвилин у мілісекундах
+    const thirtyMinutes = 30 * 60 * 1000;
 
     if (loginTimestamp && (Date.now() - parseInt(loginTimestamp)) > thirtyMinutes) {
       await this.signOut();
@@ -64,16 +64,19 @@ export class SupabaseService {
   }
 
   async getBalance(total: boolean = true) {
+    const { data: { user } } = await this.supabase.auth.getUser();
+    if (!user) throw new Error('Не авторизовано');
+
     let query = this.supabase
       .from(this.balanceTable)
-      .select('*');
+      .select('*')
+      .eq('user_id', user.id);
 
     if (total) {
       query = query.eq('type', 'total');
     }
 
     const { data, error } = await query;
-
     if (error) throw error;
     return data;
   }
@@ -85,14 +88,12 @@ export class SupabaseService {
     category: string | null = null,
     comment: string | null = null
   ) {
-    // 1. Отримуємо поточного залогіненого користувача
     const { data: { user }, error: authError } = await this.supabase.auth.getUser();
 
     if (authError || !user) {
       throw new Error('Користувач не авторизований для виконання цієї операції');
     }
 
-    // 2. Додаємо транзакцію, обов'язково вказавши user_id
     const { data: txData, error: txError } = await this.supabase
       .from(this.statisticsTable)
       .insert([
@@ -102,7 +103,7 @@ export class SupabaseService {
           sum: sum,
           category: category,
           comment: comment,
-          user_id: user.id // <--- Передаємо ID користувача в базу даних
+          user_id: user.id
         }
       ])
       .select();
@@ -112,7 +113,6 @@ export class SupabaseService {
       throw txError;
     }
 
-    // 3. Оновлюємо баланс
     try {
       await this.updateBalanceAfterTransaction(type, sum);
     } catch (balanceError) {
@@ -124,43 +124,47 @@ export class SupabaseService {
   }
 
   private async updateBalanceAfterTransaction(type: 'expense' | 'income', sum: number) {
+    const { data: { user } } = await this.supabase.auth.getUser();
+    if (!user) throw new Error('Не авторизовано');
+
     const { data: balanceData, error: getError } = await this.supabase
       .from(this.balanceTable)
       .select('id, uah')
       .eq('type', 'total')
+      .eq('user_id', user.id)
       .single();
 
     if (getError) throw getError;
     if (!balanceData) throw new Error('Запис балансу не знайдено в БД');
 
     const currentBalance = Number(balanceData.uah);
-    const newBalance = type === 'income'
-      ? currentBalance + sum
-      : currentBalance - sum;
+    const newBalance = type === 'income' ? currentBalance + sum : currentBalance - sum;
 
     const { error: updateError } = await this.supabase
       .from(this.balanceTable)
       .update({ uah: newBalance })
-      .eq('id', balanceData.id);
+      .eq('id', balanceData.id)
+      .eq('user_id', user.id);
 
     if (updateError) throw updateError;
   }
 
   async getTransactions(fromDate: string, toDate: string | null = null) {
+    const { data: { user } } = await this.supabase.auth.getUser();
+    if (!user) throw new Error('Не авторизовано');
+
     let query = this.supabase
       .from(this.statisticsTable)
-      .select('*');
+      .select('*')
+      .eq('user_id', user.id);
 
     if (toDate) {
-      query = query
-        .gte('created_at', fromDate)
-        .lte('created_at', toDate);
+      query = query.gte('created_at', fromDate).lte('created_at', toDate);
     } else {
       query = query.eq('created_at', fromDate);
     }
 
     const { data, error } = await query;
-
     if (error) throw error;
     return data;
   }

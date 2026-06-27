@@ -1,4 +1,15 @@
-/* Твої базові стилі форми */
+.success-banner {
+  background-color: #f4f7f5;
+  color: #4a7c59;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid #e2ece5;
+  margin-bottom: 4px;
+}
+
 .add-tx-container {
   display: flex;
   flex-direction: column;
@@ -16,7 +27,6 @@
   box-shadow: 0 4px 12px rgba(74, 124, 89, 0.02);
 }
 
-/* Копіюємо сюди ті самі 3 класи з історії, які працюють */
 .date-inputs {
   display: flex;
   gap: 16px;
@@ -34,10 +44,9 @@
   font-size: 14px;
   color: #7a8a81;
   font-weight: 600;
-  min-width: 45px; /* Трішки збільшили під слово "Дата" */
+  min-width: 45px;
 }
 
-/* Твій стандартний інпут */
 .input-default {
   width: 100%;
   padding: 10px 12px;
