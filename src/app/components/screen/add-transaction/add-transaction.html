@@ -5,19 +5,17 @@
   }
 
   <form (ngSubmit)="onSubmit()" class="add-tx-form">
-
-    <div class="form-group row-group">
-      <label>Дата</label>
-      <input
-        #dateInput
-        type="date"
-        class="input-default"
-        [(ngModel)]="date"
-        name="date"
-        (click)="dateInput.showPicker()"
-        required>
+    <div class="date-inputs">
+      <div class="date-group">
+        <label>Дата</label>
+        <input #dateInput
+               type="date"
+               class="input-default"
+               name="date"
+               [(ngModel)]="date"
+               (click)="dateInput.showPicker()">
+      </div>
     </div>
-
     <div class="tx-switcher">
       <button type="button" [class.active]="type() === 'expense'" (click)="setType('expense')">
         Витрата

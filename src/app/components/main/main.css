@@ -42,7 +42,7 @@
   font-family: 'Montserrat Alternates', sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: #5c6e63;
+  color: #4A7C59B3;
   cursor: pointer;
   border-radius: 14px;
   -webkit-tap-highlight-color: transparent;
@@ -50,7 +50,7 @@
 
 .bottom-nav button.active {
   color: white !important;
-  background-color: rgba(74, 124, 89, 0.70) !important;
+  background-color: #4a7c59 !important;
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow:
     0 4px 12px rgba(74, 124, 89, 0.15),

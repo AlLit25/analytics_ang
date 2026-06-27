@@ -1,19 +1,8 @@
+/* Твої базові стилі форми */
 .add-tx-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-/* Плашка успіху — використовує м'який зелений та рамку */
-.success-banner {
-  background-color: #f4f7f5;
-  color: #4a7c59;
-  padding: 12px;
-  border-radius: 10px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 14px;
-  border: 1px solid #e2ece5;
 }
 
 .add-tx-form {
@@ -27,47 +16,42 @@
   box-shadow: 0 4px 12px rgba(74, 124, 89, 0.02);
 }
 
-.form-group {
+/* Копіюємо сюди ті самі 3 класи з історії, які працюють */
+.date-inputs {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  gap: 16px;
+  width: 100%;
 }
 
-.row-group {
-  flex-direction: row;
+.date-group {
+  flex: 1;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px; /* Додаємо безпечний проміжк між текстом і інпутом */
+  gap: 8px;
 }
 
-.row-group label {
-  margin-bottom: 0;
-  flex-shrink: 0; /* Текст "Дата" ніколи не стискатиметься */
-}
-
-.row-group .input-default {
-  width: 100%; /* Дозволяємо інпуту займати доступне місце */
-  max-width: 180px; /* Обмежуємо максимальну ширину замість min-width, щоб він не розпирав контейнер */
-  margin-bottom: 0 !important;
-  text-align: right; /* Робимо дату красивішою при правому вирівнюванні */
-}
-
-/* Спеціальний хак для iOS Safari, щоб інпут дати поводився слухняно */
-input[type="date"].input-default {
-  min-width: 0 !important; /* Скидаємо внутрішні обмеження iOS */
-  display: inline-flex;
-  align-items: center;
-}
-
-.form-group label {
-  font-size: 13px;
+.date-group label {
+  font-size: 14px;
   color: #7a8a81;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  min-width: 45px; /* Трішки збільшили під слово "Дата" */
 }
 
-/* Кастомний Селект */
+/* Твій стандартний інпут */
+.input-default {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e2ece5;
+  border-radius: 6px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.date-group .input-default {
+  margin-bottom: 0 !important;
+  flex: 1;
+}
+
 .select-default {
   width: 100%;
   padding: 12px;
@@ -81,7 +65,6 @@ input[type="date"].input-default {
   outline: none;
 }
 
-/* Велике поле для суми */
 .input-sum {
   font-size: 20px;
   font-weight: 600;
@@ -90,7 +73,6 @@ input[type="date"].input-default {
   background-color: #f9fbf9;
 }
 
-/* Наш стиль табів-перемикачів (контейнер) */
 .tx-switcher {
   display: flex;
   background-color: #f4f7f5;
@@ -100,7 +82,6 @@ input[type="date"].input-default {
   border: 1px solid #e2ece5;
 }
 
-/* Кнопки всередині перемикача (Витрата / Дохід) */
 .tx-switcher button {
   flex: 1;
   background: transparent;
@@ -116,7 +97,6 @@ input[type="date"].input-default {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Оновлений АКТИВНИЙ стан перемикача у фірмовому насиченому кольорі */
 .tx-switcher button.active {
   background-color: #4a7c59;
   color: white;
@@ -124,7 +104,6 @@ input[type="date"].input-default {
   box-shadow: 0 2px 6px rgba(74, 124, 89, 0.15);
 }
 
-/* Кнопка Сабміту */
 .btn-submit {
   background-color: #4a7c59;
   color: white;
@@ -146,23 +125,9 @@ input[type="date"].input-default {
   box-shadow: none;
 }
 
-/* Адаптація під мобільні екрани */
 @media (max-width: 600px) {
   .add-tx-form {
     padding: 16px;
     gap: 14px;
-  }
-
-  /* На мобільних розгортаємо в стовпчик — це нативне та найзручніше рішення для тач-екранів */
-  .row-group {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .row-group .input-default {
-    width: 100%;
-    max-width: 100%; /* На весь екран мобільного */
-    text-align: left; /* Повертаємо ліве вирівнювання тексту */
   }
 }
