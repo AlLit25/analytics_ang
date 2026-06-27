@@ -1,0 +1,59 @@
+<div class="add-tx-container">
+
+  @if (successMessage()) {
+    <div class="success-banner">✓ Транзакцію успішно додано!</div>
+  }
+
+  <form (ngSubmit)="onSubmit()" class="add-tx-form">
+
+    <div class="form-group row-group">
+      <label>Дата</label>
+      <input type="date" class="input-default" [(ngModel)]="date" name="date" required>
+    </div>
+
+    <div class="tx-switcher">
+      <button type="button" [class.active]="type() === 'expense'" (click)="setType('expense')">
+        Витрата
+      </button>
+      <button type="button" [class.active]="type() === 'income'" (click)="setType('income')">
+        Дохід
+      </button>
+    </div>
+
+    @if (type() === 'expense') {
+      <div class="form-group">
+        <label>Категорія</label>
+        <select class="select-default" [(ngModel)]="category" name="category">
+          @for (cat of supabaseService.category | keyvalue; track cat.key) {
+            <option [value]="cat.key">{{ cat.value }}</option>
+          }
+        </select>
+      </div>
+    }
+
+    <div class="form-group">
+      <label>Сума (UAH)</label>
+      <input type="number"
+             class="input-default input-sum"
+             [(ngModel)]="sum"
+             name="sum"
+             placeholder="0.00"
+             inputmode="decimal"
+             required>
+    </div>
+
+    <div class="form-group">
+      <label>Коментар</label>
+      <input type="text"
+             class="input-default"
+             [(ngModel)]="comment"
+             name="comment"
+             placeholder="Наприклад: супермаркет, зарплата, тощо">
+    </div>
+
+    <button type="submit" class="btn-submit" [disabled]="isSubmitting() || !sum()">
+      {{ isSubmitting() ? 'Збереження...' : 'Додати транзакцію' }}
+    </button>
+
+  </form>
+</div>

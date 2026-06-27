@@ -1,0 +1,28 @@
+<div class="main-wrapper">
+
+  <div class="content-area">
+    @if (activeTab() === 'balances') {
+      <app-balance></app-balance>
+    }
+
+    @if (activeTab() === 'add') {
+      <app-add-transaction></app-add-transaction>
+    }
+
+    @if (activeTab() === 'detail') {
+      <app-detail></app-detail>
+    }
+  </div>
+
+  <nav class="bottom-nav">
+    <button [class.active]="activeTab() === 'balances'" (click)="setTab('balances')">
+      Баланс
+    </button>
+    <button [class.active]="activeTab() === 'add'" (click)="setTab('add')">
+      Додати
+    </button>
+    <button [class.active]="activeTab() === 'detail'" (click)="setTab('detail')">
+      Детально
+    </button>
+  </nav>
+</div>

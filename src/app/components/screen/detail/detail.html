@@ -1,0 +1,75 @@
+<div class="history-container">
+
+  <div class="filter-card">
+    <div class="date-inputs">
+      <div class="date-group">
+        <label>З</label>
+        <input type="date" class="input-default" [(ngModel)]="fromDate">
+      </div>
+      <div class="date-group">
+        <label>По</label>
+        <input type="date" class="input-default" [(ngModel)]="toDate">
+      </div>
+    </div>
+    <button class="button-accept btn-search" (click)="loadData()" [disabled]="isLoading()">
+      {{ isLoading() ? 'Завантаження...' : 'Відобразити' }}
+    </button>
+  </div>
+
+  <div class="summary-switcher">
+    <div class="summary-tab expense-tab"
+         [class.active]="activeType() === 'expense'"
+         (click)="activeType.set('expense')">
+      <span class="tab-label">Всього витрат</span>
+      <span class="tab-amount">-{{ totalExpense() }} UAH</span>
+    </div>
+
+    <div class="summary-tab income-tab"
+         [class.active]="activeType() === 'income'"
+         (click)="activeType.set('income')">
+      <span class="tab-label">Всього доходів</span>
+      <span class="tab-amount">+{{ totalIncome() }} UAH</span>
+    </div>
+  </div>
+
+  <div class="results-area">
+
+    @if (activeType() === 'expense') {
+      <div class="categories-list">
+        @for (cat of groupedCategories(); track cat.code) {
+          <div class="category-row">
+            <div class="cat-main-info">
+              <span class="cat-name">{{ cat.name }}</span>
+              <span class="cat-percentage">{{ cat.percentage }}%</span>
+            </div>
+            <div class="cat-price-bar">
+              <div class="progress-fill" [style.width.%]="cat.percentage"></div>
+              <span class="cat-sum">-{{ cat.sum }} UAH</span>
+            </div>
+          </div>
+        } @empty {
+          <div class="no-data">Немає витрат за вказаний період</div>
+        }
+      </div>
+    }
+
+    @if (activeType() === 'income') {
+      <div class="income-list">
+        @for (tx of incomeTransactions(); track tx.id) {
+          <div class="income-item">
+            <div class="income-info">
+              <span class="income-title">Надходження</span>
+              <span class="income-date">{{ tx.created_at | date: 'dd.MM.yyyy' }}</span>
+              @if (tx.comment) {
+                <span class="income-comment">{{ tx.comment }}</span>
+              }
+            </div>
+            <span class="income-sum">+{{ tx.sum }} UAH</span>
+          </div>
+        } @empty {
+          <div class="no-data">Немає доходів за вказаний період</div>
+        }
+      </div>
+    }
+  </div>
+</div>

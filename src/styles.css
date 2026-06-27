@@ -1,1 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fafdfb;
+  font-family: 'Montserrat Alternates', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.block-wrapper {
+  background-color: #f4f7f5;
+  border-bottom: 1px solid #e2ece5;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.block-mt {
+  margin-top: 16px;
+}
+.block-center {
+  display: flex;
+  justify-content: center;
+}
+
+.button-accept {
+  width: 100%;
+  padding: 12px;
+  background-color: #4a7c59;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.button-accept:hover { background-color: #3b6347; }
+.button-accept:disabled { background-color: #a3b899; cursor: not-allowed; }
+
+.input-default {
+  width: 100%;
+  min-width: 250px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #e2ece5;
+  border-radius: 6px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+input:focus {
+  outline: none;
+}

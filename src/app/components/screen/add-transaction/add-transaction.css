@@ -1,0 +1,148 @@
+.add-tx-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Плашка успіху — використовує м'який зелений та рамку */
+.success-banner {
+  background-color: #f4f7f5;
+  color: #4a7c59;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid #e2ece5;
+}
+
+.add-tx-form {
+  background: white;
+  border: 1px solid #e2ece5;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 4px 12px rgba(74, 124, 89, 0.02);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Для дати робимо в один рядок, щоб економити місце */
+.row-group {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.row-group label { margin-bottom: 0; }
+.row-group .input-default { width: auto; min-width: 150px; margin-bottom: 0 !important;}
+
+.form-group label {
+  font-size: 13px;
+  color: #7a8a81;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Кастомний Селект */
+.select-default {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e2ece5;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+  color: #2d3732;
+  background-color: #f9fbf9;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Велике поле для суми */
+.input-sum {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2d3732;
+  padding: 12px !important;
+  background-color: #f9fbf9;
+}
+
+/* Наш стиль табів-перемикачів (контейнер) */
+.tx-switcher {
+  display: flex;
+  background-color: #f4f7f5;
+  padding: 4px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #e2ece5;
+}
+
+/* Кнопки всередині перемикача (Витрата / Дохід) */
+.tx-switcher button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7a8a81;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Оновлений АКТИВНИЙ стан перемикача у фірмовому насиченому кольорі */
+.tx-switcher button.active {
+  background-color: #4a7c59;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(74, 124, 89, 0.15);
+}
+
+/* Кнопка Сабміту */
+.btn-submit {
+  background-color: #4a7c59;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(74, 124, 89, 0.15);
+  margin-top: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-submit:disabled {
+  background-color: #a3b8ab;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Адаптація під мобільні екрани */
+@media (max-width: 600px) {
+  .add-tx-form {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .row-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .row-group .input-default {
+    width: 100%;
+  }
+}

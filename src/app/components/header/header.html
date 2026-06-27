@@ -1,0 +1,12 @@
+<header class="block-wrapper">
+  <div class="header-container">
+    <div class="logo-container">
+      <h1 class="logo-text">Li<span class="v-accent">V</span>i Analytics</h1>
+    </div>
+    @if (supabaseService.currentUser()) {
+      <div class="logout-container">
+        <button (click)="supabaseService.signOut()" class="btn-logout">Вийти</button>
+      </div>
+    }
+  </div>
+</header>

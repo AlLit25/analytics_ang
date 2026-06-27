@@ -1,0 +1,43 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-container {
+  display: inline-block;
+}
+.logo-text {
+  font-size: 22px;
+  font-weight: 500;
+  color: #2d3732;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.v-accent {
+  color: #4a7c59;
+  font-weight: 600;
+}
+
+.btn-logout {
+  background-color: transparent;
+  color: #7a8a81;
+  border: 1px solid #d2ded5;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Ефект при наведенні мишкою */
+.btn-logout:hover {
+  color: #b94a4a;
+  background-color: #fdf2f2;
+  border-color: #f5dadb;
+  box-shadow: 0 2px 8px rgba(185, 74, 74, 0.08);
+}

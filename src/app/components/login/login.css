@@ -1,0 +1,36 @@
+.error-box {
+  color: #a74a4a;
+  background: #fdf2f2;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+/* Ізольований контейнер суто для екрану входу */
+.auth-screen {
+  display: flex !important; /* Гарантуємо флекс незалежно від базового класу */
+  justify-content: center;
+  align-items: center;
+
+  min-height: calc(100vh - 80px); /* Розтягуємо на весь екран мінус висота хедера */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px;
+}
+
+/* Стилі форми, які застосуються тільки всередині .auth-screen */
+.auth-screen form {
+  width: 100%;
+  max-width: 360px; /* Форма не розтягуватиметься на весь екран ПК */
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 12px;
+  border: 1px solid #e2ece5;
+  box-shadow: 0 8px 24px rgba(74, 124, 89, 0.04);
+}
+
+/* Робимо невеликі відступи між внутрішніми div з інпутами всередині форми */
+.auth-screen form > div {
+  margin-bottom: 16px;
+}

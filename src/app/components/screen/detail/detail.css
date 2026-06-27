@@ -1,0 +1,227 @@
+.history-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filter-card {
+  background: white;
+  border: 1px solid #e2ece5;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Контейнер вибору дат — горизонтальний на ПК */
+.date-inputs {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Рядкове відображення: лейбл + інпут в одну лінію */
+.date-group {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.date-group label {
+  font-size: 14px;
+  color: #7a8a81;
+  font-weight: 600;
+  min-width: 20px; /* Гарантує, що інпути почнуться з одного рівня */
+}
+
+/* Скидаємо нижній відступ інпута для гарного вирівнювання в рядок */
+.date-group .input-default {
+  margin-bottom: 0 !important;
+  flex: 1;
+}
+
+.btn-search {
+  margin-top: 4px;
+  width: 100%;
+}
+
+.summary-switcher {
+  display: flex;
+  gap: 12px;
+}
+
+.summary-tab {
+  flex: 1;
+  background: white;
+  border: 1px solid #e2ece5;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.tab-label {
+  font-size: 13px;
+  color: #7a8a81;
+  font-weight: 500;
+}
+
+.tab-amount {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Comfortaa', cursive;
+}
+
+.summary-tab.active.expense-tab {
+  border-color: #f5dadb;
+  background-color: #fdf2f2;
+}
+.summary-tab.active.expense-tab .tab-amount { color: #b94a4a; }
+
+.summary-tab.active.income-tab {
+  border-color: #e2ece5;
+  background-color: #f4f7f5;
+}
+.summary-tab.active.income-tab .tab-amount { color: #4a7c59; }
+
+.categories-list {
+  background: white;
+  border: 1px solid #e2ece5;
+  border-radius: 12px;
+  padding: 8px 16px;
+}
+
+.category-row {
+  padding: 16px 0;
+  border-bottom: 1px solid #f4f7f5;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.category-row:last-child { border-bottom: none; }
+
+.cat-main-info {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  color: #2d3732;
+  font-size: 15px;
+}
+
+.cat-percentage {
+  color: #7a8a81;
+  font-size: 13px;
+}
+
+.cat-price-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  height: 24px;
+  background-color: #f9fbf9;
+  border-radius: 4px;
+  padding: 0 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: rgba(245, 218, 219, 0.4);
+  z-index: 1;
+}
+
+.cat-sum {
+  position: relative;
+  z-index: 2;
+  font-weight: 600;
+  color: #b94a4a;
+  font-size: 14px;
+  margin-left: auto;
+}
+
+.income-list {
+  background: white;
+  border: 1px solid #e2ece5;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.income-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f4f7f5;
+}
+
+.income-item:last-child { border-bottom: none; }
+
+.income-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.income-title {
+  color: #2d3732;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.income-date {
+  color: #9cb0a4;
+  font-size: 11px;
+}
+
+.income-comment {
+  color: #7a8a81;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.income-sum {
+  font-weight: 600;
+  color: #4a7c59;
+  font-size: 15px;
+}
+
+.no-data {
+  text-align: center;
+  color: #7a8a81;
+  padding: 32px;
+  font-size: 14px;
+}
+
+/* Оновлена адаптивність для мобільних пристроїв */
+@media (max-width: 600px) {
+  .date-inputs {
+    flex-direction: column; /* Стовпчик для блоків дат на мобільних */
+    gap: 12px;
+  }
+
+  .date-group {
+    width: 100%; /* Кожен блок займає всю ширину, але "З/По" та інпут лишаються в лінію */
+  }
+
+  .filter-card {
+    padding: 12px;
+  }
+
+  .summary-tab {
+    padding: 12px;
+  }
+
+  .tab-amount {
+    font-size: 16px;
+  }
+}

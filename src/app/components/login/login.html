@@ -1,0 +1,25 @@
+<div class="block-wrapper block-mt block-center auth-screen">
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <input class="input-default" type="email" id="email" name="email"
+             [(ngModel)]="email"
+             required
+             placeholder="Електронна пошта">
+    </div>
+
+    <div>
+      <input class="input-default" type="password" id="password" name="password"
+             [(ngModel)]="password"
+             required
+             placeholder="Пароль">
+    </div>
+
+    @if (errorMessage()) {
+      <div class="error-box">{{ errorMessage() }}</div>
+    }
+
+    <button class="button-accept" type="submit" [disabled]="isLoading()">
+      {{ isLoading() ? 'Вхід...' : 'Увійти' }}
+    </button>
+  </form>
+</div>

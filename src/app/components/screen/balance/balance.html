@@ -1,0 +1,61 @@
+<div class="balances-container">
+
+  @if (isLoading()) {
+    <div class="loading-status">Завантаження фінансових даних...</div>
+  } @else if (errorMessage()) {
+    <div class="error-box">{{ errorMessage() }}</div>
+  } @else {
+
+    <div class="balance-card">
+      <h3>Поточний баланс</h3>
+      @for (item of balances(); track item.id) {
+        <div class="balance-value">
+          {{ item.uah }} <span class="currency">UAH</span>
+        </div>
+        <div class="">
+          Накопичення ${{ item.usd }}
+        </div>
+      } @empty {
+        <div class="no-data">Баланс не налаштовано</div>
+      }
+    </div>
+
+    <div class="transactions-section">
+      <div class="tx-switcher">
+        <button [class.active]="activeTxType() === 'expense'" (click)="setTxType('expense')">
+          Витрати
+        </button>
+        <button [class.active]="activeTxType() === 'income'" (click)="setTxType('income')">
+          Доходи
+        </button>
+      </div>
+
+      <div class="transactions-list">
+        @for (tx of filteredTransactions(); track tx.id) {
+          <div class="tx-item">
+
+            <div class="tx-info">
+          <span class="tx-category">
+            {{ tx.type === 'expense' ? (supabaseService.category[tx.category] || 'Інше') : 'Надходження' }}
+          </span>
+              @if (tx.comment) {
+                <span class="tx-comment">{{ tx.comment }}</span>
+              }
+            </div>
+
+            <div class="tx-amount-wrapper">
+          <span class="tx-amount" [class.income]="tx.type === 'income'" [class.expense]="tx.type === 'expense'">
+            {{ tx.type === 'expense' ? '-' : '+' }}{{ tx.sum }} UAH
+          </span>
+            </div>
+
+          </div>
+        } @empty {
+          <div class="no-data">
+            Сьогодні {{ activeTxType() === 'expense' ? 'витрат' : 'доходів' }} ще не було
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
