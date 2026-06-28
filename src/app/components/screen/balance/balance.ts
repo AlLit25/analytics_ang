@@ -46,4 +46,16 @@ export class Balance implements OnInit {
   protected setTxType(type: 'expense' | 'income') {
     this.activeTxType.set(type);
   }
+
+  public todayTotalExpenses = computed(() => {
+    return this.todayTransactions()
+      .filter(tx => tx.type === 'expense')
+      .reduce((sum, tx) => sum + Number(tx.sum), 0);
+  });
+
+  public todayTotalIncome = computed(() => {
+    return this.todayTransactions()
+      .filter(tx => tx.type === 'income')
+      .reduce((sum, tx) => sum + Number(tx.sum), 0);
+  });
 }

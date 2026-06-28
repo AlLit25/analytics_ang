@@ -37,7 +37,7 @@
     }
 
     <div class="form-group">
-      <label>Сума (UAH)</label>
+      <label>Сума</label>
       <input type="number"
              class="input-default input-sum"
              [(ngModel)]="sum"
@@ -52,8 +52,7 @@
       <input type="text"
              class="input-default"
              [(ngModel)]="comment"
-             name="comment"
-             placeholder="Наприклад: супермаркет, зарплата, тощо">
+             name="comment">
     </div>
 
     <button type="submit" class="btn-submit" [disabled]="isSubmitting() || !sum()">

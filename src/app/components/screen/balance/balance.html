@@ -21,6 +21,17 @@
     </div>
 
     <div class="transactions-section">
+      <div class="today-stats-grid">
+        <div class="stat-card expense-card">
+          <span class="stat-label">Витрати</span>
+          <span class="stat-value">-{{ todayTotalExpenses() }} UAH</span>
+        </div>
+        <div class="stat-card income-card">
+          <span class="stat-label">Доходи</span>
+          <span class="stat-value">+{{ todayTotalIncome() }} UAH</span>
+        </div>
+      </div>
+
       <div class="tx-switcher">
         <button [class.active]="activeTxType() === 'expense'" (click)="setTxType('expense')">
           Витрати

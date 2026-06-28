@@ -132,3 +132,52 @@
   font-size: 14px;
 }
 
+.today-stats-grid {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.stat-card {
+  flex: 1;
+  background: white;
+  border: 1px solid #e2ece5;
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #7a8a81;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Стиль для картки витрат (ніжно-червоний підтон) */
+.stat-card.expense-card {
+  border-color: #f5dadb;
+  background-color: #fdf2f2;
+}
+.stat-card.expense-card .stat-value {
+  color: #b94a4a;
+}
+
+/* Стиль для картки доходів (ніжно-зелений підтон) */
+.stat-card.income-card {
+  border-color: #e2ece5;
+  background-color: #f4f7f5;
+}
+.stat-card.income-card .stat-value {
+  color: #4a7c59;
+}
+
