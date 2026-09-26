@@ -40,7 +40,7 @@
   border: none;
   padding: 10px 20px;
   font-family: 'Montserrat Alternates', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   color: #4A7C59B3;
   cursor: pointer;
@@ -71,7 +71,7 @@
 
   .bottom-nav button {
     padding: 10px 12px;
-    font-size: 13px;
+    font-size: 16px;
     border-radius: 12px;
   }
 }

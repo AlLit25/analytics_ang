@@ -30,7 +30,7 @@
 }
 
 .date-group label {
-  font-size: 14px;
+  font-size: 16px;
   color: #7a8a81;
   font-weight: 600;
   min-width: 20px; /* Гарантує, що інпути почнуться з одного рівня */
@@ -66,7 +66,7 @@
 }
 
 .tab-label {
-  font-size: 13px;
+  font-size: 16px;
   color: #7a8a81;
   font-weight: 500;
 }
@@ -111,12 +111,12 @@
   justify-content: space-between;
   font-weight: 500;
   color: #2d3732;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .cat-percentage {
   color: #7a8a81;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .cat-price-bar {
@@ -145,7 +145,7 @@
   z-index: 2;
   font-weight: 600;
   color: #b94a4a;
-  font-size: 14px;
+  font-size: 16px;
   margin-left: auto;
 }
 
@@ -175,31 +175,31 @@
 .income-title {
   color: #2d3732;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .income-date {
   color: #9cb0a4;
-  font-size: 11px;
+  font-size: 16px;
 }
 
 .income-comment {
   color: #7a8a81;
-  font-size: 12px;
+  font-size: 16px;
   margin-top: 2px;
 }
 
 .income-sum {
   font-weight: 600;
   color: #4a7c59;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .no-data {
   text-align: center;
   color: #7a8a81;
   padding: 32px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* Оновлена адаптивність для мобільних пристроїв */
