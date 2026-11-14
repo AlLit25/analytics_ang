@@ -46,6 +46,10 @@
   cursor: pointer;
   border-radius: 14px;
   -webkit-tap-highlight-color: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bottom-nav button.active {

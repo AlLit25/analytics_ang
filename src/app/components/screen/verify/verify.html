@@ -1,0 +1,68 @@
+<div class="add-tx-container">
+  @if (successMessage()) {
+    <div class="success-banner">Баланс оновлено!</div>
+  }
+
+  <div class="tx-switcher">
+    <button type="button" [class.active]="type() === 'UAH'" (click)="setType('UAH')">
+      Баланс
+    </button>
+    <button type="button" [class.active]="type() === 'USD'" (click)="setType('USD')">
+      Накопичення
+    </button>
+  </div>
+
+  @if (type() === 'USD') {
+    <form (ngSubmit)="onSubmitUsd()" class="add-tx-form">
+      <div class="date-inputs">
+        <div class="balance-row ">
+          <label class="balance-label">Баланс USD</label>
+          <input #numberInput
+                 type="number"
+                 step="any"
+                 class="balance-number"
+                 name="usd_balance"
+                 [ngModel]="usdBalance()"
+                 (ngModelChange)="usdBalance.set($event)">
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="isSubmittingUsd() || usdBalance === null">
+        {{ isSubmittingUsd() ? 'Оновлення...' : 'Оновити' }}
+      </button>
+    </form>
+  }
+
+  @if (type() === 'UAH') {
+    <form (ngSubmit)="onSubmitAllBalances()" class="add-tx-form">
+      <div class="balances-list">
+        @for (item of allBalances; track item.id) {
+          <div class="balance-row">
+            <label class="balance-label">{{ item.name }}</label>
+            <input type="number"
+                   step="any"
+                   class="balance-number"
+                   [class.modified-input]="isChanged(item)"
+                   [name]="'uah_' + item.id"
+                   [(ngModel)]="item.uah">
+          </div>
+        }
+      </div>
+
+      <button type="submit" class="btn-submit" [disabled]="isSubmittingAllBalances()">
+        {{ isSubmittingAllBalances() ? 'Оновлення...' : 'Оновити' }}
+      </button>
+    </form>
+    <div class="add-tx-form">
+      <div>
+        <label>Актуальний баланс: {{ formatNumber(getUahBalanceActual()) }} UAH</label>
+      </div>
+      <div>
+        <label>Збережений баланс: {{ formatNumber(uahBalanceDB()) }} UAH</label>
+      </div>
+      <div>
+        <label><b>Різниця: </b> {{ formatNumber(uahBalanceDB() - getUahBalanceActual()) }} UAH</label>
+      </div>
+    </div>
+  }
+</div>

@@ -1,10 +1,21 @@
 import { Injectable, signal } from '@angular/core';
 import { createClient, SupabaseClient, User } from '@supabase/supabase-js';
 
+export interface BalanceItem {
+  id: number;
+  name: string;
+  type: string;
+  usd?: number;
+  uah: number;
+  created_at: string;
+  updated_at: string;
+  user_id: string;
+  originalUah?: number; // додатковий атрибут для компонента Verify
+}
+
 @Injectable({
   providedIn: 'root'
 })
-
 export class SupabaseService {
   private supabaseUrl = 'https://vntunuzrneoakdckqjvk.supabase.co';
   private supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZudHVudXpybmVvYWtkY2txanZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE3MTI5NzEsImV4cCI6MjA2NzI4ODk3MX0.CWJIVqq-x5_doDk8rsl8ZJWP7um9VakuIDBihcfsrsU';
@@ -16,6 +27,7 @@ export class SupabaseService {
     "pr": "Продукти",
     "cf": "Кафе",
     "cm": "Комунальні платежі",
+    "sub": "Підписки",
     "md": "Аптека",
     "eva": "Eva/Makeup",
     "zoo": "Зоотовари",
@@ -144,6 +156,33 @@ export class SupabaseService {
       .from(this.balanceTable)
       .update({ uah: newBalance })
       .eq('id', balanceData.id)
+      .eq('user_id', user.id);
+
+    if (updateError) throw updateError;
+  }
+
+  async updateUsd(usdBalance: number, id: number) {
+    const { data: { user } } = await this.supabase.auth.getUser();
+    if (!user) throw new Error('Не авторизовано');
+
+    const { error: updateError } = await this.supabase
+      .from(this.balanceTable)
+      .update({ usd: usdBalance })
+      .eq('id', id)
+      .eq('user_id', user.id);
+
+    if (updateError) throw updateError;
+  }
+
+
+  async updateUah(uahBalance: number, id: number) {
+    const { data: { user } } = await this.supabase.auth.getUser();
+    if (!user) throw new Error('Не авторизовано');
+
+    const { error: updateError } = await this.supabase
+      .from(this.balanceTable)
+      .update({ uah: uahBalance })
+      .eq('id', id)
       .eq('user_id', user.id);
 
     if (updateError) throw updateError;

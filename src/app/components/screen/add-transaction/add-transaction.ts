@@ -40,14 +40,12 @@ export class AddTransaction {
       this.isSubmitting.set(true);
       this.successMessage.set(false);
 
-      // 1. Готуємо значення локально
       const txDate = this.date();
       const txType = this.type();
       const txSum = this.sum()!; // знак !, бо ми вже перевірили, що там не null
       const txCategory = this.type() === 'expense' ? this.category() : null;
       const txComment = this.comment().trim() || null;
 
-      // 2. Викликаємо метод, передаючи параметри по черзі
       await this.supabaseService.insertRecord(
         txDate,
         txType,
@@ -56,7 +54,6 @@ export class AddTransaction {
         txComment
       );
 
-      // Успішно додано! Очищаємо поля
       this.sum.set(null);
       this.comment.set('');
       this.successMessage.set(true);
@@ -64,7 +61,6 @@ export class AddTransaction {
       setTimeout(() => this.successMessage.set(false), 3000);
 
     } catch (error) {
-      console.error('Помилка при додаванні транзакції:', error);
       alert('Не вдалося зберегти транзакцію.');
     } finally {
       this.isSubmitting.set(false);
