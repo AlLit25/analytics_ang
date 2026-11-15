@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SupabaseService, BalanceItem } from '../../../services/supabase';
+import {config} from 'rxjs';
 
 @Component({
   selector: 'app-verify',
@@ -20,6 +21,9 @@ export class Verify implements OnInit {
   protected isSubmittingUsd = signal<boolean>(false);
   protected allBalances: BalanceItem[] = [];
   protected isSubmittingAllBalances = signal<boolean>(false);
+  protected hasChanges(): boolean {
+    return this.allBalances.some(item => item.uah !== item.originalUah);
+  }
   protected getUahBalanceActual(): number {
     return this.allBalances.reduce((sum, item) => sum + Number(item.uah || 0), 0);
   }
@@ -69,40 +73,44 @@ export class Verify implements OnInit {
   }
 
   async onSubmitUsd() {
-    this.isSubmittingUsd.set(true);
+    if (confirm('Підтвердити оновлення балансу?')) {
+      this.isSubmittingUsd.set(true);
 
-    try {
-      await this.supabaseService.updateUsd(this.usdBalance(), this.totalId);
-    } catch (error) {
-      console.error('Помилка при оновленні балансу:', error);
-    } finally {
-      this.successMessage.set(true);
+      try {
+        await this.supabaseService.updateUsd(this.usdBalance(), this.totalId);
+      } catch (error) {
+        console.error('Помилка при оновленні балансу:', error);
+      } finally {
+        this.successMessage.set(true);
 
-      setTimeout(() => this.successMessage.set(false), 3000);
-      this.isSubmittingUsd.set(false);
+        setTimeout(() => this.successMessage.set(false), 3000);
+        this.isSubmittingUsd.set(false);
+      }
     }
   }
 
   async onSubmitAllBalances() {
-    this.isSubmittingAllBalances.set(true);
+    if (confirm('Підтвердити оновлення балансу?')) {
+      this.isSubmittingAllBalances.set(true);
 
-    try {
-      const updatePromises = this.allBalances
-        .filter(item => item.uah !== item.originalUah)
-        .map(item => this.supabaseService.updateUah(item.uah, item.id));
+      try {
+        const updatePromises = this.allBalances
+          .filter(item => item.uah !== item.originalUah)
+          .map(item => this.supabaseService.updateUah(item.uah, item.id));
 
-      updatePromises.push(
-        this.supabaseService.updateUah(this.getUahBalanceActual(), this.totalId)
-      );
+        updatePromises.push(
+          this.supabaseService.updateUah(this.getUahBalanceActual(), this.totalId)
+        );
 
-      await Promise.all(updatePromises);
-    } catch (error) {
-      console.error('Помилка при оновленні:', error);
-    } finally {
-      this.successMessage.set(true);
+        await Promise.all(updatePromises);
+      } catch (error) {
+        console.error('Помилка при оновленні:', error);
+      } finally {
+        this.successMessage.set(true);
 
-      setTimeout(() => this.successMessage.set(false), 3000);
-      this.isSubmittingAllBalances.set(false);
+        setTimeout(() => this.successMessage.set(false), 3000);
+        this.isSubmittingAllBalances.set(false);
+      }
     }
   }
 

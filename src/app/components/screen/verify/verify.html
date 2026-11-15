@@ -49,7 +49,9 @@
         }
       </div>
 
-      <button type="submit" class="btn-submit" [disabled]="isSubmittingAllBalances()">
+      <button type="submit"
+              class="btn-submit"
+              [disabled]="!hasChanges() || isSubmittingAllBalances()">
         {{ isSubmittingAllBalances() ? 'Оновлення...' : 'Оновити' }}
       </button>
     </form>
