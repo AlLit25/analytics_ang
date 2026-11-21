@@ -6,7 +6,7 @@
 
 /* Картка Балансу */
 .balance-card {
-  background: linear-gradient(135deg, #4a7c59, #3b6347);
+  background: linear-gradient( 135deg, #7ab08a, #2b5a39);
   color: white;
   padding: 24px;
   border-radius: 16px;
@@ -61,7 +61,7 @@
 
 /* Активний стан кнопок перемикача */
 .tx-switcher button.active {
-  background-color: #4a7c59;
+  background-color: #7ab08a;
   color: white;
   font-weight: 600;
   box-shadow: 0 2px 6px rgba(74, 124, 89, 0.06);

@@ -15,15 +15,38 @@
   @if (type() === 'USD') {
     <form (ngSubmit)="onSubmitUsd()" class="add-tx-form">
       <div class="date-inputs">
-        <div class="balance-row ">
+        <div class="balance-row">
           <label class="balance-label">Баланс USD</label>
-          <input #numberInput
-                 type="number"
-                 step="any"
-                 class="balance-number"
-                 name="usd_balance"
-                 [ngModel]="usdBalance()"
-                 (ngModelChange)="usdBalance.set($event)">
+          <input
+            #numberInput
+            type="number"
+            step="any"
+            class="balance-number"
+            name="usd_balance"
+            [ngModel]="usdBalance()"
+            (ngModelChange)="usdBalance.set($event)"
+          >
+        </div>
+      </div>
+
+      <div class="date-inputs">
+        <div class="balance-row">
+          <label class="balance-label">Курс</label>
+          <input
+            type="number"
+            step="any"
+            name="exchange_rate"
+            class="balance-number"
+            [ngModel]="exchangeRate()"
+            (ngModelChange)="exchangeRate.set($event)"
+          >
+        </div>
+      </div>
+
+      <div class="date-inputs">
+        <div class="balance-row">
+          <label class="balance-label">У гривнях:</label>
+          <label>{{ formattedUsdInUah() }}</label>
         </div>
       </div>
 

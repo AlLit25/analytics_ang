@@ -28,6 +28,7 @@ export class Verify implements OnInit {
     return this.allBalances.reduce((sum, item) => sum + Number(item.uah || 0), 0);
   }
   protected successMessage = signal<boolean>(false);
+  protected exchangeRate = signal<number>(45);
 
   ngOnInit() {
     this.loadCurrentBalance();
@@ -36,6 +37,17 @@ export class Verify implements OnInit {
   protected setType(newType: 'UAH' | 'USD') {
     this.type.set(newType);
   }
+
+  protected usdInUah = computed(() => {
+    const usd = Number(this.usdBalance() || 0);
+    const rate = Number(this.exchangeRate() || 0);
+    return usd * rate;
+  });
+
+  protected formattedUsdInUah = computed(() => {
+    const total = Math.round(this.usdInUah() * 100) / 100;
+    return this.formatNumber(total);
+  });
 
   private async loadCurrentBalance() {
     try {
@@ -90,27 +102,38 @@ export class Verify implements OnInit {
   }
 
   async onSubmitAllBalances() {
-    if (confirm('Підтвердити оновлення балансу?')) {
-      this.isSubmittingAllBalances.set(true);
+    if (!confirm('Підтвердити оновлення балансу?')) {
+      return;
+    }
 
-      try {
-        const updatePromises = this.allBalances
-          .filter(item => item.uah !== item.originalUah)
-          .map(item => this.supabaseService.updateUah(item.uah, item.id));
+    this.isSubmittingAllBalances.set(true);
 
+    try {
+      const changedItems = this.allBalances.filter(item => item.uah !== item.originalUah);
+
+      if (changedItems.length === 0) {
+        return;
+      }
+
+      const updatePromises = changedItems.map(item =>
+        this.supabaseService.updateUah(item.uah, item.id)
+      );
+
+      if (this.totalId) {
         updatePromises.push(
           this.supabaseService.updateUah(this.getUahBalanceActual(), this.totalId)
         );
-
-        await Promise.all(updatePromises);
-      } catch (error) {
-        console.error('Помилка при оновленні:', error);
-      } finally {
-        this.successMessage.set(true);
-
-        setTimeout(() => this.successMessage.set(false), 3000);
-        this.isSubmittingAllBalances.set(false);
       }
+
+      await Promise.all(updatePromises);
+      await this.loadCurrentBalance();
+
+      this.successMessage.set(true);
+      setTimeout(() => this.successMessage.set(false), 3000);
+    } catch (error) {
+      console.error('Помилка при оновленні:', error);
+    } finally {
+      this.isSubmittingAllBalances.set(false);
     }
   }
 

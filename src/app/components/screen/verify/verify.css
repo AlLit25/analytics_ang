@@ -35,7 +35,7 @@
 
 
 .btn-submit {
-  background-color: #4a7c59;
+  background-color: #7ab08a;
   color: white;
   border: none;
   border-radius: 10px;
@@ -73,7 +73,7 @@
   box-sizing: border-box;
 }
 .balance-number.modified-input {
-  border-color: #4a7c59 !important;
+  border-color: #7ab08a !important;
   box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
 }
 
@@ -103,7 +103,7 @@
 }
 
 .tx-switcher button.active {
-  background-color: #4a7c59;
+  background-color: #7ab08a;
   color: white;
   font-weight: 600;
   box-shadow: 0 2px 6px rgba(74, 124, 89, 0.15);

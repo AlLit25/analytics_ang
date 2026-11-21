@@ -113,14 +113,14 @@
 }
 
 .tx-switcher button.active {
-  background-color: #4a7c59;
+  background-color: #7ab08a;
   color: white;
   font-weight: 600;
   box-shadow: 0 2px 6px rgba(74, 124, 89, 0.15);
 }
 
 .btn-submit {
-  background-color: #4a7c59;
+  background-color: #7ab08a;
   color: white;
   border: none;
   border-radius: 10px;
